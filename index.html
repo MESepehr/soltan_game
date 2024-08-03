@@ -30,12 +30,73 @@
 </body>
 <script>
     // JavaScript
-    document.getElementById("ball").style.top = '100px';
+    var ballX = 0 ;
+    var ballY = 0 ;
 
-    document.onmousemove = function(event)
+    var ballYSpeed = 2;
+    var ballXSpeed = 1;
+
+    const rocketY = 200 ;
+    const ballH = 20 ;
+    const stageSizeW = 400 ;
+
+    const rockerW = 100 ;
+    var rocketCurrentX = 0 ;
+
+//////////////////////////////////////////////
+
+    document.getElementById("rocket").style.top=rocketY+'px';
+
+
+    document.onmousemove = rocketAnimation ;
+    var intervalId = setInterval(ballAnimation,30);
+
+
+//////////////////////////////////////////////
+    function rocketAnimation(event)
     {
-        document.getElementById("rocket").style.top='200px';
+        document.getElementById("rocket").style.top=rocketY+'px';
         document.getElementById("rocket").style.left = event.pageX+'px';
+        rocketCurrentX = event.pageX ;
+    }
+
+    function ballAnimation()
+    {
+        if( ballY + ballH >= rocketY )
+        {
+            if(ballX > rocketCurrentX && ballX < rocketCurrentX + rockerW)
+            {
+                ballYSpeed = ballYSpeed * -1 ;
+            }
+            else
+            {
+                clearInterval(intervalId);
+                alert("Game Over!!");
+            }
+        }
+
+        if( ballY < 0 )
+        {
+            ballYSpeed = ballYSpeed * -1 ;
+        }
+
+        if( ballX + ballH >= stageSizeW)
+        {
+            ballXSpeed = ballXSpeed * -1 ;
+        }
+
+        if( ballX < 0)
+        {
+            ballXSpeed = ballXSpeed * -1 ;
+        }
+
+        ballX = ballX + ballXSpeed ;
+        ballY = ballY + ballYSpeed ;
+
+
+        document.getElementById("ball").style.top = ballY+'px';
+        document.getElementById("ball").style.left = ballX+'px';
+
     }
 
 
