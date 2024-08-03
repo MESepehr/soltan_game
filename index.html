@@ -5,10 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyGame</title>
 </head>
+<style>
+    /* CSS */
+    #ball{
+        position:absolute;
+        width:20px;
+        height:20px;
+        background-color: red;
+        border-radius: 20px;
+    }
+
+    #rocket{
+        position:absolute;
+        width:100px;
+        height:20px;
+        background-color: brown;
+    }
+
+</style>
 <body>
-    <div style="width:20px;height:20px;background-color: red;border-radius: 20px;"></div>
-    <div style="width:100px;height:20px;background-color: brown;"></div>
+    <!-- HTML -->
+    <div id="ball"></div>
+    <div id="rocket"></div>
 </body>
 <script>
+    // JavaScript
+    document.getElementById("ball").style.top = '100px';
+
+    document.onmousemove = function(event)
+    {
+        document.getElementById("rocket").style.top='200px';
+        document.getElementById("rocket").style.left = event.pageX+'px';
+    }
+
+
 </script>
 </html>
