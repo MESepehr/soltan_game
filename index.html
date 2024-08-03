@@ -33,6 +33,8 @@
     var ballX = 0 ;
     var ballY = 0 ;
 
+    var isGameOver = false ;
+
     var ballYSpeed = 2;
     var ballXSpeed = 1;
 
@@ -49,7 +51,7 @@
 
 
     document.onmousemove = rocketAnimation ;
-    var intervalId = setInterval(ballAnimation,30);
+    setInterval(ballAnimation,30);
 
 
 //////////////////////////////////////////////
@@ -62,33 +64,37 @@
 
     function ballAnimation()
     {
-        if( ballY + ballH >= rocketY )
-        {
-            if(ballX > rocketCurrentX && ballX < rocketCurrentX + rockerW)
+        if(isGameOver == false){
+            if( ballY + ballH >= rocketY )
+            {
+                /* توضیحات چیزی که فهمیدین و میخواین یادتون بمونه */
+                if(ballX >= rocketCurrentX - ballH/2 && ballX < rocketCurrentX + rockerW - ballH/2)
+                {
+                    ballYSpeed = ballYSpeed * -1 ;
+                }
+                else
+                {
+                    isGameOver = true ;
+                    alert("Game Over!!");
+                }
+            }
+
+            if( ballY < 0 )
             {
                 ballYSpeed = ballYSpeed * -1 ;
             }
-            else
+
+            if( ballX + ballH >= stageSizeW)
             {
-                clearInterval(intervalId);
-                alert("Game Over!!");
+                ballXSpeed = ballXSpeed * -1 ;
+            }
+
+            if( ballX < 0)
+            {
+                ballXSpeed = ballXSpeed * -1 ;
             }
         }
-
-        if( ballY < 0 )
-        {
-            ballYSpeed = ballYSpeed * -1 ;
-        }
-
-        if( ballX + ballH >= stageSizeW)
-        {
-            ballXSpeed = ballXSpeed * -1 ;
-        }
-
-        if( ballX < 0)
-        {
-            ballXSpeed = ballXSpeed * -1 ;
-        }
+        
 
         ballX = ballX + ballXSpeed ;
         ballY = ballY + ballYSpeed ;
